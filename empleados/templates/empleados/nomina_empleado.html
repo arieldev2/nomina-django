@@ -1,0 +1,46 @@
+{% extends "empleados/base.html" %}
+
+
+{% block content %}
+
+{% with item=items|first %}
+  <h2>Historial de nomina de "{{ item.Nombre_completo }}"</h2>
+  {% endwith %}
+
+<a class="btn btn-primary mt-2" href="{% url 'nomina-crear' %}">Nueva Nomina</a>
+
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th scope="col">Clave de empleado</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Salario base</th>
+      <th scope="col">Dias laborados</th>
+      <th scope="col">Salario total</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Detalles</th>
+      <th scope="col">Editar</th>
+      <th scope="col">Eliminar</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% for item in items %}
+  		
+    <tr>
+      <td>{{ item.clave_emp }}</td>
+      <td>{{ item.Nombre_completo }}</td>
+      <td>${{ item.salario_base }} Pesos</td>
+      <td>{{ item.dias_laborados }}</td>
+      <td>${{ item.salario_total }} Pesos</td>
+      <td>{{ item.fecha }}</td>
+      <td><a class="btn btn-sm btn-success" href="{% url 'nomina-detalles' item.id %}">Detalles</a></td>
+      <td><a class="btn btn-sm btn-warning" href="{% url 'nomina-editar' item.id %}">Editar</a></td>
+      <td><a class="btn btn-sm btn-danger" href="{% url 'nomina-eliminar' item.id %}">Eliminar</a></td>
+    </tr>
+
+    {% endfor %}
+ 
+  </tbody>
+</table>
+	
+{% endblock %}

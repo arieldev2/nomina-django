@@ -1,0 +1,33 @@
+{% extends "empleados/base.html" %}
+
+{% block content %}
+
+
+	
+<div class="container">
+	<div class="row justify-content-center ">
+	<div class="card  ">
+	<form method="POST" >
+		{% csrf_token %}
+		<div class="card-header">
+			<h4>Eliminar Empleado</h4>
+		</div>
+			<div class="card-body">
+			<h5>Esta seguro de eliminar al empleado "{{ object.Nombre_completo }}"?</h5>
+		
+			
+			<button type="submit" class="btn btn-danger">Si, Eliminar</button>
+			<a class="btn btn-secondary" href="{% url 'empleado-detalles' object.id %}">Cancelar</a>
+			
+		</div>
+		
+	</form>
+	
+</div>
+</div>
+</div>
+
+
+
+
+{% endblock content %}

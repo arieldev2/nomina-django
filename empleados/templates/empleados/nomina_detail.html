@@ -1,0 +1,29 @@
+{% extends "empleados/base.html" %}
+
+{% block content %}
+
+<div class="card  mt-3">
+	<div class="card-header">Nomina de {{ object.Nombre_completo }}</div>
+	<div class="card-body">
+		<strong>Clave de empleado: </strong>{{ object.clave_emp }}<br>
+		<strong>Nombre: </strong>{{ object.empleado.nombre }}<br>
+		<strong>Primer Apellido: </strong>{{ object.empleado.primer_apellido }}<br>
+		<strong>Segundo Apellido: </strong>{{ object.empleado.segundo_apellido }}<br>
+		<strong>Area: </strong>{{ object.empleado.area }}<br>
+		<strong>Puesto: </strong>{{ object.empleado.puesto }}<br>
+		<strong>Salario base: </strong>{{ object.salario_base }}<br>
+		<strong>Dias laborados: </strong>{{ object.dias_laborados }}<br>
+		<strong>Salario total: </strong>{{ object.salario_total }}<br>
+		<strong>Fecha: </strong>{{ object.fecha }}<br><br>
+
+		<div>
+			<a class="btn btn-primary" href="{% url 'index' %}">Regresar</a>
+			<a class="btn btn-warning" href="{% url 'nomina-editar' object.id %}">Editar</a>
+			<a class="btn btn-danger" href="{% url 'nomina-eliminar' object.id %}">Eliminar</a>
+			<a class="btn btn-secondary" href="{% url 'nomina-empleado' object.empleado.clave_empleado %}">Historial de nominas</a>
+		</div>
+	</div>
+	
+</div>
+
+{% endblock %}

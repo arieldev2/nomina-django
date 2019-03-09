@@ -1,0 +1,70 @@
+{% extends "empleados/base.html" %}
+
+
+{% block content %}
+
+<h1 class="text-center">Nominas</h1>
+
+<a class="btn btn-primary mt-2" href="{% url 'nomina-crear' %}">Nueva Nomina</a>
+
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th scope="col">Clave de empleado</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Salario base</th>
+      <th scope="col">Dias laborados</th>
+      <th scope="col">Salario total</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Detalles</th>
+      <th scope="col">Editar</th>
+      <th scope="col">Eliminar</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% for item in items %}
+  		
+    <tr>
+      <td>{{ item.clave_emp }}</td>
+      <td>{{ item.Nombre_completo }}</td>
+      <td>${{ item.salario_base }} Pesos</td>
+      <td>{{ item.dias_laborados }}</td>
+      <td>${{ item.salario_total }} Pesos</td>
+      <td>{{ item.fecha }}</td>
+      <td><a class="btn btn-sm btn-success" href="{% url 'nomina-detalles' item.id %}">Detalles</a></td>
+      <td><a class="btn btn-sm btn-warning" href="{% url 'nomina-editar' item.id %}">Editar</a></td>
+      <td><a class="btn btn-sm btn-danger" href="{% url 'nomina-eliminar' item.id %}">Eliminar</a></td>
+    </tr>
+
+    {% endfor %}
+ 
+  </tbody>
+</table>
+
+
+<div class="mt-3">
+{% if is_paginated %}
+
+{% if page_obj.has_previous %}
+  <a class="btn btn-outline-primary mb-4" href="?page=1">First</a>
+  <a class="btn btn-outline-primary mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+{% endif %} 
+
+{% for num in page_obj.paginator.page_range %}
+  {% if page_obj.number == num %}
+    <a class="btn btn-primary mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+    <a class="btn btn-outline-primary mb-4" href="?page={{ num }}">{{ num }}</a>
+  {% endif %}
+{% endfor %}
+
+{% if page_obj.has_next %}
+  <a class="btn btn-outline-primary mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+  <a class="btn btn-outline-primary mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+{% endif %} 
+
+{% endif %}
+
+</div>
+	
+{% endblock %}

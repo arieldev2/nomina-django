@@ -1,0 +1,29 @@
+{% extends "empleados/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container mt-3">
+
+<div class="card">
+	<div class="card-header">Empleado</div>
+	<div class="card-body">
+		<form method="POST">
+			{% csrf_token %}
+
+			{{form|crispy}}
+
+
+			<button class="btn btn-primary" type="submit">Guardar Empleado</button>
+
+			
+		</form>
+		<div class="mt-4">
+			<a class="btn btn-success" href="{% url 'index-empleados' %}">Regresar</a>
+		</div>
+	</div>
+	
+</div>
+</div>
+
+{% endblock %}

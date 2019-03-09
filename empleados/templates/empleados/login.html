@@ -1,0 +1,29 @@
+{% extends "empleados/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<div class=" container pt-2" >
+<div class="card">
+	<div class="card-header"><h4>Iniciar Sesion</h4></div>
+	<div class="card-body">
+		<form method="POST">
+			{% csrf_token %}
+
+			{{ form|crispy }}
+
+
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">Iniciar</button>
+			</div>
+
+			
+		</form>
+		
+	</div>
+	
+</div>
+</div>
+
+{% endblock content %}
